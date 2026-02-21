@@ -55,6 +55,33 @@ Keuze uit drie combinaties: alleen CRM, CRM + automation, of CRM + automation + 
 Bekijk de skill: [`Skills/TwentyCRM/`](../Skills/TwentyCRM/)
 Lees de uitleg: [`Skills/TwentyCRM/README.md`](../Skills/TwentyCRM/README.md)
 
+### N8nSelfHosted -- Workflow automation op je eigen server
+
+Installeer n8n op je eigen server: een visueel automation platform met 400+ integraties. Geen limiet op workflows of executions, volledige controle over je data.
+
+**Wat doet deze skill?**
+- Begeleide installatie van n8n met Docker Compose en PostgreSQL
+- Keuze uit reverse proxy: nginx of Caddy (automatische SSL)
+- Optioneel: migratie van n8n cloud workflows naar self-hosted
+- Optioneel: begeleiding bij het opnieuw instellen van credentials
+- Security hardening, backup procedure en periodiek onderhoud inbegrepen
+
+**Hoe gebruik je het?**
+
+Zeg dit tegen je AI-assistent (bijv. Claude):
+
+> "Ik wil n8n installeren op mijn server"
+
+Of als je van n8n cloud wilt migreren:
+
+> "Ik wil mijn n8n cloud workflows overzetten naar self-hosted"
+
+De assistent begeleidt je van servervoorbereiding tot verificatie.
+Keuze uit drie combinaties: alleen n8n, n8n + migratie, of n8n + migratie + credentials begeleiding.
+
+Bekijk de skill: [`Skills/N8nSelfHosted/`](../Skills/N8nSelfHosted/)
+Lees de uitleg: [`Skills/N8nSelfHosted/README.md`](../Skills/N8nSelfHosted/README.md)
+
 ---
 
 ## Contact
