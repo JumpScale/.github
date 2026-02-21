@@ -82,6 +82,27 @@ Keuze uit drie combinaties: alleen n8n, n8n + migratie, of n8n + migratie + cred
 Bekijk de skill: [`Skills/N8nSelfHosted/`](../Skills/N8nSelfHosted/)
 Lees de uitleg: [`Skills/N8nSelfHosted/README.md`](../Skills/N8nSelfHosted/README.md)
 
+### TriggerDev -- Background jobs op je eigen server
+
+Installeer Trigger.dev op je eigen server: een open-source platform voor background jobs, cron tasks en event-driven workflows in TypeScript. Geen limieten op runs, volledige controle over je data.
+
+**Wat doet deze skill?**
+- Begeleide installatie van Trigger.dev v4 met Docker Compose (webapp, worker, database, cache)
+- Reverse proxy met nginx + SSL via Let's Encrypt
+- Security hardening, backup procedure en periodiek onderhoud inbegrepen
+- Eerste job opzetten en deployen
+
+**Hoe gebruik je het?**
+
+Zeg dit tegen je AI-assistent (bijv. Claude):
+
+> "Ik wil Trigger.dev installeren op mijn server"
+
+De assistent begeleidt je van servervoorbereiding tot verificatie.
+
+Bekijk de skill: [`Skills/TriggerDev/`](../Skills/TriggerDev/)
+Lees de uitleg: [`Skills/TriggerDev/README.md`](../Skills/TriggerDev/README.md)
+
 ---
 
 ## Contact
