@@ -33,6 +33,28 @@ Geen serverkennis vereist — alleen een terminal en een Hetzner-account.
 Bekijk de skill: [`Skills/HetznerOpenClaw/`](../Skills/HetznerOpenClaw/)
 Lees de uitleg: [`Skills/HetznerOpenClaw/README.md`](../Skills/HetznerOpenClaw/README.md)
 
+### TwentyCRM -- Self-hosted CRM met workflow automation
+
+Installeer Twenty CRM op je eigen server: een open-source CRM met volledige controle over je klantdata. Geen licentiekosten per gebruiker, geen vendor lock-in.
+
+**Wat doet deze skill?**
+- Begeleide installatie van Twenty CRM met Docker Compose (server, database, cache)
+- Optioneel: n8n erbij voor workflow automation (lead intake, notificaties, koppelingen)
+- Optioneel: datamodel op maat met eigen objecten, velden en relaties
+- Security hardening, SSL, backup procedure en periodiek onderhoud inbegrepen
+
+**Hoe gebruik je het?**
+
+Zeg dit tegen je AI-assistent (bijv. Claude):
+
+> "Ik wil Twenty CRM installeren op mijn server"
+
+De assistent begeleidt je van servervoorbereiding tot verificatie.
+Keuze uit drie combinaties: alleen CRM, CRM + automation, of CRM + automation + datamodel op maat.
+
+Bekijk de skill: [`Skills/TwentyCRM/`](../Skills/TwentyCRM/)
+Lees de uitleg: [`Skills/TwentyCRM/README.md`](../Skills/TwentyCRM/README.md)
+
 ---
 
 ## Contact
