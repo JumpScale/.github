@@ -51,7 +51,7 @@ EOF
 ## Stap 4: Werkmap aanmaken
 
 ```bash
-ssh root@<SERVER_IP> "mkdir -p /opt/trigger"
+ssh root@<SERVER_IP> "mkdir -p /opt/trigger-dev"
 ```
 
 ## Verificatie
@@ -68,7 +68,7 @@ free -h
 echo "=== Firewall ==="
 ufw status
 echo "=== Werkmap ==="
-ls -la /opt/trigger/
+ls -la /opt/trigger-dev/
 EOF
 ```
 
@@ -77,4 +77,4 @@ Verwacht:
 - Docker + Compose geinstalleerd
 - Minimaal 8 GB RAM beschikbaar
 - UFW actief met poorten 22, 80, 443 open
-- `/opt/trigger/` bestaat
+- `/opt/trigger-dev/` bestaat

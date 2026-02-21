@@ -1,11 +1,11 @@
 ---
 name: TriggerDev
-description: Begeleide installatie en onderhoud van Trigger.dev v4 background job platform op een eigen server met Docker Compose. USE WHEN trigger.dev installeren, trigger.dev opzetten, trigger.dev deployen, self-hosted trigger.dev, background jobs, task queue, trigger.dev server, trigger.dev onderhoud, trigger.dev backup, job processing, typescript background tasks.
+description: Begeleide installatie en onderhoud van Trigger.dev v4 background job platform op een eigen server met Docker Compose. USE WHEN trigger.dev installeren, trigger.dev opzetten, trigger.dev deployen, self-hosted trigger.dev, background jobs, task queue, trigger.dev server, trigger.dev onderhoud, trigger.dev backup, job processing, typescript background tasks, trigger.dev v4.
 ---
 
 # TriggerDev
 
-Begeleide installatie en onderhoud van Trigger.dev op een eigen server.
+Begeleide installatie en onderhoud van Trigger.dev v4 op een eigen server.
 Geschikt voor technisch onderlegde gebruikers die background job processing willen zonder afhankelijkheid van Trigger.dev cloud.
 
 ## Workflow Routing
@@ -41,9 +41,10 @@ Running the **WorkflowName** workflow from the **TriggerDev** skill...
 
 - Trigger.dev GitHub: https://github.com/triggerdotdev/trigger.dev
 - Trigger.dev Docs: https://trigger.dev/docs
-- Trigger.dev Docker: https://github.com/triggerdotdev/docker
+- Trigger.dev Self-Host Docs: https://trigger.dev/docs/open-source-self-hosting
+- Trigger.dev Hosting Repo: https://github.com/triggerdotdev/trigger.dev/tree/main/hosting/docker
 - Trigger.dev Releases: https://github.com/triggerdotdev/trigger.dev/releases
-- Docker images: ghcr.io/triggerdotdev/trigger.dev, ghcr.io/triggerdotdev/provider/docker, ghcr.io/triggerdotdev/coordinator
+- Docker images: ghcr.io/triggerdotdev/trigger.dev:v4-beta, ghcr.io/triggerdotdev/supervisor:v4-beta
 
 **Nooit gebruiken:** willekeurige blogs, LinkedIn-artikelen, Substack, niet-officiele tutorials.
 

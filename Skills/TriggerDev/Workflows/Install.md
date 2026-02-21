@@ -1,9 +1,10 @@
 # Install Workflow
 
-Begeleide installatie van Trigger.dev op een eigen server met Docker Compose.
+Begeleide installatie van Trigger.dev v4 op een eigen server met Docker Compose.
 
 ```
-We gaan Trigger.dev installeren op je server. Ik loop eerst even langs alles
+We gaan Trigger.dev v4 installeren op je server. Dit is een grotere setup dan v3:
+9 containers in twee Docker Compose stacks. Ik loop eerst even langs alles
 wat we nodig hebben -- wat ik zelf kan checken doe ik meteen, en als ik
 jou ergens bij nodig heb, zeg ik het duidelijk. Klaar?
 ```
@@ -29,10 +30,12 @@ ssh root@<SERVER_IP> "uname -a && docker --version && docker compose version"
 ssh root@<SERVER_IP> "free -h && nproc && df -h /"
 ```
 
-Trigger.dev vereist minimaal:
-- 8 GB RAM (aanbevolen: 16 GB)
+Trigger.dev v4 vereist minimaal:
+- 8 GB RAM (aanbevolen: 16 GB) -- ClickHouse en MinIO vragen meer resources dan v3
 - 2 CPU cores
 - 40 GB disk
+
+Bij een shared VPS met beperkt RAM: stel `NODE_MAX_OLD_SPACE_SIZE=1600` in.
 
 ### Check 3 -- Domeinnaam [Jij moet dit doen]
 
@@ -46,7 +49,17 @@ Dit is nodig voor SSL en voor de API URL die je SDK gebruikt.
 ### Check 4 -- Vrije poorten [Claude doet dit]
 
 ```bash
-ss -tlnp | grep -E ':80|:443|:3040'
+ss -tlnp | grep -E ':80|:443|:8030'
+```
+
+### Check 5 -- GitHub Container Registry [Jij moet dit doen]
+
+```
+Heb je een GitHub account met een Personal Access Token (PAT) dat
+write:packages scope heeft? Dit is nodig voor de Docker registry.
+
+v4 gebruikt ghcr.io voor het opslaan van gebouwde task images.
+Een lokale Docker registry werkt niet goed door BuildKit networking issues.
 ```
 
 ### Samenvatting
@@ -55,9 +68,10 @@ ss -tlnp | grep -E ':80|:443|:3040'
 Vereisten-check klaar:
 - SSH toegang tot server
 - Docker + Docker Compose aanwezig
-- RAM: [hoeveelheid] (minimaal 8 GB)
+- RAM: [hoeveelheid] (minimaal 8 GB, aanbevolen 16 GB)
 - Domeinnaam: [domein]
 - Poorten beschikbaar
+- GitHub PAT met write:packages scope
 
 We kunnen beginnen.
 ```
@@ -77,8 +91,8 @@ Lees en volg: `../Research.md`
 ```
 Wat wil je installeren?
 
-A) Alleen Trigger.dev (fresh start, dashboard + API)
-B) Trigger.dev + project setup (SDK configuratie, eerste task deployen)
+A) Alleen Trigger.dev v4 (fresh start, dashboard + API + 9 containers)
+B) Trigger.dev v4 + project setup (SDK configuratie, eerste task deployen)
 ```
 
 ### Vraag 2: Tailscale?
@@ -94,9 +108,9 @@ Nee -> Publiek bereikbaar met login + security headers.
 
 ```
 Installatie-plan:
-- Trigger.dev deployen (Docker Compose)
-- Reverse proxy + SSL
-[als B] - SDK configuratie + eerste task
+- Trigger.dev v4 deployen (2 Docker Compose stacks, 9 containers)
+- Reverse proxy + SSL (nginx + certbot)
+[als B] - SDK configuratie + eerste task deploy (vanaf VPS)
 [als Tailscale=ja] - Tailscale installeren
 - Security hardening
 - Backup procedure
@@ -112,7 +126,7 @@ Doorgaan?
 ### Stap 1 -- Server voorbereiden (altijd)
 Lees en volg: `../Runbooks/01-Vps.md`
 
-### Stap 2 -- Trigger.dev installeren (altijd)
+### Stap 2 -- Trigger.dev v4 installeren (altijd)
 Lees en volg: `../Runbooks/02-TriggerDev.md`
 
 ### Stap 3 -- Reverse proxy + SSL (altijd)
@@ -138,17 +152,20 @@ Lees en volg: `../Runbooks/06-Verify.md`
 Installatie voltooid.
 
 Samenvatting:
-- Trigger.dev dashboard: https://[domein]
+- Trigger.dev v4 dashboard: https://[domein]
 - API URL (voor SDK): https://[domein]
+- Containers: 9 stuks in 2 Docker Compose stacks
+- Management: /opt/trigger-dev/trigger-ctl.sh {up|down|restart|logs|status}
 - Backup: dagelijks, 7 dagen retentie
 
 Bewaar deze gegevens veilig:
 - Server IP
 - Trigger.dev login e-mailadres (magic link auth)
-- MAGIC_LINK_SECRET en SESSION_SECRET (in /opt/trigger/.env)
+- Secrets in /opt/trigger-dev/.env
+- GitHub PAT voor ghcr.io
 
 Volgende stappen:
 - Periodiek onderhoud: zeg "voer onderhoud uit op mijn Trigger.dev"
 - SDK configureren in je project: TRIGGER_API_URL=https://[domein]
-- Eerste task deployen: npx trigger.dev@latest deploy
+- Tasks deployen (vanaf VPS): npx trigger.dev@latest deploy --api-url https://[domein]
 ```

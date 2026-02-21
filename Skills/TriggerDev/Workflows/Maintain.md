@@ -1,6 +1,6 @@
 # Maintain Workflow
 
-Periodiek onderhoud voor een bestaande Trigger.dev self-hosted installatie.
+Periodiek onderhoud voor een bestaande Trigger.dev v4 self-hosted installatie.
 Aanbevolen: eens per maand uitvoeren, of na een nieuwe Trigger.dev release.
 
 ---
@@ -22,20 +22,20 @@ Lees en volg: `../Research.md`
 Vergelijk de gevonden versie met de draaiende versie:
 
 ```bash
-ssh root@<SERVER_IP> "docker compose -f /opt/trigger/docker-compose.yml exec -T webapp cat package.json 2>/dev/null | python3 -c \"import json,sys; print(json.load(sys.stdin).get('version','onbekend'))\" 2>/dev/null || docker inspect trigger-webapp --format '{{.Config.Image}}'"
+ssh root@<SERVER_IP> "docker inspect trigger-webapp --format '{{.Config.Image}}'"
 ```
 
 ---
 
 ## Fase 2: Status-check
 
-### Containers
+### Containers (verwacht: 9 stuks)
 
 ```bash
-ssh root@<SERVER_IP> "docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}' | grep -E 'trigger|postgres|redis|coordinator|provider|electric'"
+ssh root@<SERVER_IP> "/opt/trigger-dev/trigger-ctl.sh status"
 ```
 
-Verwacht: webapp, postgres, redis, docker-provider, coordinator en electric containers draaien.
+Verwacht: webapp, postgres, redis, electric, clickhouse, minio, supervisor, docker-proxy en evt. registry draaien.
 
 ### Disk en geheugen
 
@@ -52,7 +52,7 @@ ssh root@<SERVER_IP> "certbot certificates 2>/dev/null || echo 'certbot niet gei
 ### Backups
 
 ```bash
-ssh root@<SERVER_IP> "ls -lh /opt/trigger/backups/ 2>/dev/null | tail -5 || echo 'Geen backups gevonden'"
+ssh root@<SERVER_IP> "ls -lh /opt/trigger-dev/backups/ 2>/dev/null | tail -5 || echo 'Geen backups gevonden'"
 ```
 
 ### Reboot nodig?
@@ -61,15 +61,22 @@ ssh root@<SERVER_IP> "ls -lh /opt/trigger/backups/ 2>/dev/null | tail -5 || echo
 ssh root@<SERVER_IP> "test -f /var/run/reboot-required && echo 'REBOOT AANBEVOLEN' || echo 'Geen reboot nodig'"
 ```
 
+### ghcr.io login geldig?
+
+```bash
+ssh root@<SERVER_IP> "docker pull ghcr.io/triggerdotdev/trigger.dev:v4-beta --quiet && echo 'ghcr.io login OK' || echo 'ghcr.io login VERLOPEN - docker login ghcr.io uitvoeren'"
+```
+
 ### Samenvatting
 
 ```
 Status-check:
-- Containers: [status]
+- Containers: [status] (verwacht: 9 draaien)
 - Disk: [gebruik]%
 - SSL: geldig tot [datum]
 - Backups: [laatste datum]
 - Reboot: [wel/niet nodig]
+- ghcr.io: [geldig/verlopen]
 
 [Als nieuwe versie beschikbaar:] Update beschikbaar: [huidige] -> [nieuwe versie]
 ```
@@ -83,11 +90,11 @@ Maak altijd een backup voor een update.
 ```bash
 ssh root@<SERVER_IP> << 'EOF'
 DATE=$(date +%Y%m%d-%H%M)
-BACKUP_DIR="/opt/trigger/backups"
+BACKUP_DIR="/opt/trigger-dev/backups"
 mkdir -p "$BACKUP_DIR"
 
-# Database backup
-docker compose -f /opt/trigger/docker-compose.yml exec -T postgres pg_dumpall -U trigger | gzip > "$BACKUP_DIR/trigger-db-$DATE.sql.gz"
+# Database backup (container: trigger-postgres-1, user: postgres)
+docker exec trigger-postgres-1 pg_dumpall -U postgres | gzip > "$BACKUP_DIR/trigger-db-$DATE.sql.gz"
 
 echo "Backup klaar: $BACKUP_DIR"
 ls -lh "$BACKUP_DIR" | tail -5
@@ -102,20 +109,22 @@ Alleen uitvoeren als research een nieuwere versie heeft gevonden.
 
 ```bash
 ssh root@<SERVER_IP> << 'EOF'
-cd /opt/trigger
-
 # Huidige images noteren voor rollback
 CURRENT=$(docker inspect trigger-webapp --format '{{.Config.Image}}')
 echo "Huidige image: $CURRENT"
 
-# Nieuwe versie pullen
-docker compose pull
+# Update image tag in .env als nodig
+# Voorbeeld: sed -i 's/TRIGGER_IMAGE_TAG=v4-beta/TRIGGER_IMAGE_TAG=v4/' /opt/trigger-dev/.env
 
-# Deployen
-docker compose up -d
+# Nieuwe versie pullen
+docker compose -f /opt/trigger-dev/webapp/docker-compose.yml --env-file /opt/trigger-dev/.env pull
+docker compose -f /opt/trigger-dev/worker/docker-compose.yml --env-file /opt/trigger-dev/.env pull
+
+# Deployen via management script
+/opt/trigger-dev/trigger-ctl.sh restart
 
 # Logs checken
-docker compose logs --tail=20 webapp
+/opt/trigger-dev/trigger-ctl.sh logs webapp 2>&1 | tail -20
 EOF
 ```
 
@@ -123,10 +132,11 @@ EOF
 
 ```bash
 ssh root@<SERVER_IP> << 'EOF'
-cd /opt/trigger
-# Pas de image tags in docker-compose.yml terug naar de vorige versie
-docker compose up -d
-docker compose logs --tail=20 webapp
+# Pas de TRIGGER_IMAGE_TAG in /opt/trigger-dev/.env terug naar de vorige versie
+# Voorbeeld: sed -i 's/TRIGGER_IMAGE_TAG=v4/TRIGGER_IMAGE_TAG=v4-beta/' /opt/trigger-dev/.env
+
+/opt/trigger-dev/trigger-ctl.sh restart
+/opt/trigger-dev/trigger-ctl.sh logs webapp 2>&1 | tail -20
 EOF
 ```
 
@@ -140,7 +150,7 @@ ssh root@<SERVER_IP> << 'EOF'
 docker image prune -f
 
 # Oude backups opruimen (bewaar laatste 7)
-cd /opt/trigger/backups
+cd /opt/trigger-dev/backups
 ls -t trigger-db-*.sql.gz 2>/dev/null | tail -n +8 | xargs -r rm
 
 echo "Opruimen klaar"
@@ -159,9 +169,10 @@ Doorloop de checks uit `../Runbooks/06-Verify.md`.
 ## Maandelijkse checklist
 
 - [ ] Research uitgevoerd (versie + security advisories)
-- [ ] Alle containers draaien (webapp, postgres, redis, docker-provider, coordinator, electric)
+- [ ] Alle 9 containers draaien (webapp, postgres, redis, electric, clickhouse, minio, supervisor, docker-proxy, registry)
 - [ ] Disk < 80% gebruik
 - [ ] SSL certificaat geldig
+- [ ] ghcr.io login geldig
 - [ ] Backup gemaakt en geverifieerd
 - [ ] Update uitgevoerd indien nieuwe versie beschikbaar
 - [ ] Reboot uitgevoerd indien aanbevolen
