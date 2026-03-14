@@ -1,27 +1,23 @@
 # JumpScale — .github
 
-Publieke repository van JumpScale. Bevat de organisatie-profielpagina en gedeelde resources.
+Publieke repository van JumpScale. Bevat de organisatie-profielpagina en AI-begeleide installatiescripts.
 
 Zie onze [organisatiepagina op GitHub](https://github.com/JumpScale) voor de volledige introductie.
 
 ---
 
-## Inhoud van deze repo
-
-```
-.github/
-├── profile/
-│   └── README.md        ← Organisatie-profielpagina (zichtbaar op github.com/JumpScale)
-└── Skills/
-    └── HetznerOpenClaw/ ← Begeleide installatie van OpenClaw op Hetzner Cloud VPS
-```
-
 ## Skills
 
-Skills zijn begeleide AI-workflows. Je voert ze uit samen met een AI-assistent zoals Claude.
+Skills zijn begeleide AI-workflows. Je voert ze uit samen met een AI-assistent zoals Claude Code.
+De assistent leest de skill in, doet onderzoek, voert commando's uit en controleert of alles werkt.
 
-| Skill | Beschrijving |
+| Skill | Wat het doet |
 |-------|-------------|
-| [HetznerOpenClaw](Skills/HetznerOpenClaw/) | Veilige Hetzner VPS opzetten + OpenClaw installeren |
+| [HetznerVPS](Skills/HetznerVPS/) | Veilige Hetzner Cloud VPS opzetten met firewall en hardening |
+| [OpenClaw](Skills/OpenClaw/) | Persoonlijke AI-assistent installeren op je eigen server |
+| [TwentyCRM](Skills/TwentyCRM/) | Open-source CRM met optionele workflow automation |
+| [N8nSelfHosted](Skills/N8nSelfHosted/) | Visueel automation platform, self-hosted |
+| [TriggerDev](Skills/TriggerDev/) | Background jobs en cron tasks in TypeScript |
 
-Meer informatie: [Skills/HetznerOpenClaw/README.md](Skills/HetznerOpenClaw/README.md)
+> De `HetznerOpenClaw` skill is gesplitst in `HetznerVPS` en `OpenClaw` voor betere herbruikbaarheid.
+> De VPS-setup is nu onafhankelijk van OpenClaw bruikbaar.
