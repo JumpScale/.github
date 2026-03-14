@@ -1,6 +1,6 @@
-# Research — Actuele bronnen ophalen
+# Research  -  Actuele bronnen ophalen
 
-Claude voert deze stap uit aan het begin van elke Install- of Maintain-sessie.
+De AI-assistent voert deze stap uit aan het begin van elke Install- of Maintain-sessie.
 Doel: zeker weten dat de installatie gebaseerd is op de meest actuele informatie.
 
 ## Stap 1: OpenClaw changelog ophalen
@@ -22,16 +22,7 @@ Noteer:
 - Aanbevolen mitigaties
 - Of de huidige installatie (indien Maintain) kwetsbaar is
 
-## Stap 3: Hetzner hcloud CLI versie checken
-
-```bash
-hcloud version
-```
-
-Noteer: versienummer. Als de CLI sterk verouderd is, gebruiker adviseren te updaten
-(`brew upgrade hcloud` op Mac).
-
-## Stap 4: Bevindingen samenvatten
+## Stap 3: Bevindingen samenvatten
 
 Na het ophalen van bovenstaande informatie, geef de gebruiker een korte samenvatting:
 
@@ -39,12 +30,11 @@ Na het ophalen van bovenstaande informatie, geef de gebruiker een korte samenvat
 Research-uitkomst:
 - OpenClaw versie: [versie] ([datum])
 - Security fixes: [samenvatting of "geen kritieke issues"]
-- Aandachtspunten voor deze installatie: [eventuele bijzonderheden]
-- hcloud CLI: [versie]
+- Aandachtspunten: [eventuele bijzonderheden]
 ```
 
 Als er kritieke security issues zijn: benoem ze expliciet en vraag of de gebruiker
-wil doorgaan met de installatie.
+wil doorgaan.
 
 ## Bronnen-protocol
 
@@ -55,7 +45,6 @@ wil doorgaan met de installatie.
 | OpenClaw GitHub | https://github.com/openclaw/openclaw |
 | Changelog | https://github.com/openclaw/openclaw/blob/main/CHANGELOG.md |
 | Security advisories | https://github.com/openclaw/openclaw/security/advisories |
-| Hetzner API docs | https://docs.hetzner.cloud/reference/cloud |
 
 **NOOIT:** openclaw.report, willekeurige blogs, LinkedIn, Substack, AI-gegenereerde artikelen.
 Als een bron niet in bovenstaande tabel staat: niet gebruiken.
