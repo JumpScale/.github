@@ -4,7 +4,7 @@
 
 **AI-begeleide installatiescripts voor je eigen infrastructuur**
 
-*Geen handboeken doorploegen. Zeg wat je wilt — je AI-assistent loopt mee.*
+*Geen handboeken doorploegen. Zeg wat je wilt  -  je AI-assistent loopt mee.*
 
 </div>
 
@@ -27,7 +27,7 @@ Jij hebt alleen nodig:
 
 | Skill | Wat het doet | Zeg dit tegen je assistent |
 |-------|-------------|---------------------------|
-| **[HetznerVPS](Skills/HetznerVPS/)** | Veilige VPS opzetten op Hetzner Cloud — firewall, SSH-hardening, Tailscale | *"Ik wil een veilige VPS opzetten op Hetzner"* |
+| **[HetznerVPS](Skills/HetznerVPS/)** | Veilige VPS opzetten op Hetzner Cloud  -  firewall, SSH-hardening, Tailscale | *"Ik wil een veilige VPS opzetten op Hetzner"* |
 | **[OpenClaw](Skills/OpenClaw/)** | Persoonlijke AI-assistent installeren op je eigen server | *"Ik wil OpenClaw installeren op mijn server"* |
 | **[TwentyCRM](Skills/TwentyCRM/)** | Open-source CRM met optionele workflow automation via n8n | *"Ik wil Twenty CRM installeren op mijn server"* |
 | **[N8nSelfHosted](Skills/N8nSelfHosted/)** | Visueel automation platform met 400+ integraties | *"Ik wil n8n installeren op mijn server"* |

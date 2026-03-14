@@ -1,4 +1,4 @@
-# 01 — VPS Aanmaken en Basisconfiguratie
+# 01  -  VPS Aanmaken en Basisconfiguratie
 
 Runbook voor het opzetten van een nieuwe Hetzner Cloud VPS met SSH hardening en automatische beveiligingsupdates. Dit is de eerste stap voordat je Tailscale, Caddy of applicaties installeert.
 
@@ -52,7 +52,7 @@ Controleer eerst welke server-types beschikbaar zijn (Hetzner hernoemt typen per
 hcloud server-type list
 ```
 
-Kies een type met minimaal 4 vCPU en 8 GB RAM — momenteel `cx33` of equivalent. `nbg1` (Neurenberg) is een solide keuze voor Europese latency. Controleer de huidige naam in de lijst hierboven als `cx33` niet beschikbaar is.
+Kies een type met minimaal 4 vCPU en 8 GB RAM  -  momenteel `cx33` of equivalent. `nbg1` (Neurenberg) is een solide keuze voor Europese latency. Controleer de huidige naam in de lijst hierboven als `cx33` niet beschikbaar is.
 
 ```bash
 hcloud server create \
@@ -77,7 +77,7 @@ De `--label` vlag maakt het later makkelijk om servers te groeperen en te filter
 
 ## 3. Eerste Inlog en Systeem-update
 
-Een verse Ubuntu-installatie bevat vrijwel altijd openstaande pakketupdates. Patch eerst alles voordat je verder gaat — zo verklein je het aanvalsoppervlak voor de stappen erna.
+Een verse Ubuntu-installatie bevat vrijwel altijd openstaande pakketupdates. Patch eerst alles voordat je verder gaat  -  zo verklein je het aanvalsoppervlak voor de stappen erna.
 
 ```bash
 SSH_IP=$(hcloud server ip <SERVERNAAM>)
@@ -100,7 +100,7 @@ ssh root@$SSH_IP "uname -r && uptime"
 
 ## 4. SSH Hardening
 
-Wachtwoordauthenticatie is de grootste aanvalsvector op publieke servers. Bots scannen continu het internet op SSH-poort 22 en proberen zwakke wachtwoorden. Door alleen SSH-keys toe te staan — en het aantal inlogpogingen te beperken — sluit je deze aanvalsvector volledig af.
+Wachtwoordauthenticatie is de grootste aanvalsvector op publieke servers. Bots scannen continu het internet op SSH-poort 22 en proberen zwakke wachtwoorden. Door alleen SSH-keys toe te staan  -  en het aantal inlogpogingen te beperken  -  sluit je deze aanvalsvector volledig af.
 
 ```bash
 SSH_IP=$(hcloud server ip <SERVERNAAM>)
@@ -130,7 +130,7 @@ ssh root@$SSH_IP "echo 'SSH hardening OK'"
 
 ## 5. Automatische Beveiligingsupdates
 
-Handmatig patchen vergeet je. `unattended-upgrades` zorgt dat beveiligingsupdates automatisch worden geïnstalleerd. Kernelversies worden niet automatisch actief — dat vereist een handmatige reboot — maar pakketbeveiligingsupdates worden wel direct toegepast.
+Handmatig patchen vergeet je. `unattended-upgrades` zorgt dat beveiligingsupdates automatisch worden geïnstalleerd. Kernelversies worden niet automatisch actief  -  dat vereist een handmatige reboot  -  maar pakketbeveiligingsupdates worden wel direct toegepast.
 
 Controleer of de service al draait (Ubuntu 24.04 heeft dit meestal standaard actief):
 
@@ -168,4 +168,4 @@ ssh root@$SSH_IP "hostname"
 
 De VPS is nu aangemaakt en basisbeveiliging is op orde. Ga verder met:
 
-**[02-Firewall.md](02-Firewall.md)** — UFW en Hetzner Cloud Firewall instellen.
+**[02-Firewall.md](02-Firewall.md)**  -  UFW en Hetzner Cloud Firewall instellen.

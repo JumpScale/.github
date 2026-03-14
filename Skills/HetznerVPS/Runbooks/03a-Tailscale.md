@@ -1,8 +1,8 @@
-# 03a-Tailscale — Veilige Toegang via Tailscale
+# 03a-Tailscale  -  Veilige Toegang via Tailscale
 
 ## Wat is Tailscale?
 
-Tailscale is een VPN-dienst die een privaat netwerk aanmaakt tussen jouw apparaten. Zodra Tailscale op de VPS is geinstalleerd, is de server bereikbaar via dit private netwerk — niet via het publieke internet. OpenClaw's interface hoeft daardoor niet publiek blootgesteld te worden.
+Tailscale is een VPN-dienst die een privaat netwerk aanmaakt tussen jouw apparaten. Zodra Tailscale op de VPS is geinstalleerd, is de server bereikbaar via dit private netwerk  -  niet via het publieke internet. OpenClaw's interface hoeft daardoor niet publiek blootgesteld te worden.
 
 **Voordelen:**
 - Geen publieke HTTPS-poort nodig voor OpenClaw
@@ -32,7 +32,7 @@ Koppel de VPS aan jouw Tailscale-account. De hostnaam bepaalt hoe de server zich
 ssh root@<IP> "tailscale up --hostname <SERVERNAAM>"
 ```
 
-Het commando geeft een URL terug — open deze in je browser om de VPS te autoriseren in de Tailscale console.
+Het commando geeft een URL terug  -  open deze in je browser om de VPS te autoriseren in de Tailscale console.
 
 Na autorisatie, verifieer de verbinding:
 
@@ -45,7 +45,7 @@ ssh root@<IP> "tailscale status"
 
 ## Sectie 3: Tailscale HTTPS inschakelen
 
-Tailscale kan automatisch HTTPS-certificaten verzorgen voor je VPS — zonder eigen domein. Dit werkt via `tailscale serve`, dat de service beschikbaar maakt op het Tailscale-netwerk:
+Tailscale kan automatisch HTTPS-certificaten verzorgen voor je VPS  -  zonder eigen domein. Dit werkt via `tailscale serve`, dat de service beschikbaar maakt op het Tailscale-netwerk:
 
 ```bash
 # Als OpenClaw direct op poort 18789 luistert:
@@ -76,7 +76,7 @@ Zodra je apparaat verbonden is met hetzelfde Tailscale-netwerk, is OpenClaw bere
 https://<TAILSCALE-HOSTNAME>/
 ```
 
-Geen extra configuratie nodig — Tailscale regelt de routering en het certificaat automatisch.
+Geen extra configuratie nodig  -  Tailscale regelt de routering en het certificaat automatisch.
 
 ---
 
@@ -106,7 +106,7 @@ Anywhere on tailscale0    ALLOW IN    Anywhere
 
 Tailscale probeert altijd een directe peer-to-peer verbinding op te zetten via UDP poort 41641. Dit is sneller dan een relay. Als een directe verbinding niet mogelijk is (bijv. door NAT), valt Tailscale terug op DERP-relayservers (Tailscale's eigen infrastructuur).
 
-De firewallregel voor UDP 41641 (ingesteld in `02-Firewall.md`) maakt directe verbindingen mogelijk. Zonder deze regel werkt Tailscale nog steeds, maar via relay — met iets hogere latency.
+De firewallregel voor UDP 41641 (ingesteld in `02-Firewall.md`) maakt directe verbindingen mogelijk. Zonder deze regel werkt Tailscale nog steeds, maar via relay  -  met iets hogere latency.
 
 Controleer welk verbindingstype actief is:
 

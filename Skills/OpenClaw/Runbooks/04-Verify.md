@@ -1,10 +1,10 @@
-# 04-Verify — OpenClaw Verificatie-Checklist
+# 04-Verify  -  OpenClaw Verificatie-Checklist
 
 Dit runbook verifieert of de OpenClaw-installatie volledig en correct werkt.
 
 ---
 
-## 1. Quick check — alles draait?
+## 1. Quick check  -  alles draait?
 
 ```bash
 # Containers

@@ -1,4 +1,4 @@
-# 04-Verify — VPS Verificatie-Checklist
+# 04-Verify  -  VPS Verificatie-Checklist
 
 Dit runbook verifieert of de VPS-installatie volledig en correct is uitgevoerd.
 Voer dit uit nadat alle gekozen runbooks zijn doorlopen.
@@ -84,5 +84,5 @@ Vink af op basis van de gemaakte keuzes:
 Na succesvolle verificatie:
 
 1. **Noteer je gegevens veilig** (IP-adres, Tailscale-hostnaam)
-2. **Installeer applicaties** — bijv. OpenClaw (zie de [OpenClaw skill](../../OpenClaw/))
-3. **Periodiek onderhoud** — voer maandelijks de Maintain-workflow uit
+2. **Installeer applicaties**  -  bijv. OpenClaw (zie de [OpenClaw skill](../../OpenClaw/))
+3. **Periodiek onderhoud**  -  voer maandelijks de Maintain-workflow uit

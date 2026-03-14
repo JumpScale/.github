@@ -1,4 +1,4 @@
-# JumpScale — .github
+# JumpScale  -  .github
 
 Publieke repository van JumpScale. Bevat de organisatie-profielpagina en AI-begeleide installatiescripts.
 

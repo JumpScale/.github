@@ -1,4 +1,4 @@
-# Research — Actuele bronnen ophalen
+# Research  -  Actuele bronnen ophalen
 
 De AI-assistent voert deze stap uit aan het begin van elke Install- of Maintain-sessie.
 Doel: zeker weten dat de installatie gebaseerd is op de meest actuele informatie.

@@ -1,4 +1,4 @@
-# 02-OpenClaw — Installatie en Configuratie
+# 02-OpenClaw  -  Installatie en Configuratie
 
 OpenClaw draait als Docker container. We clonen de broncode, bouwen een lokale image,
 configureren de omgeving en starten het geheel op met Docker Compose.
@@ -9,7 +9,7 @@ configureren de omgeving en starten het geheel op met Docker Compose.
 
 - Docker geïnstalleerd (zie [01-Docker.md](01-Docker.md))
 - Git beschikbaar op de VPS
-- Telegram Bot Token — aan te maken via @BotFather in Telegram
+- Telegram Bot Token  -  aan te maken via @BotFather in Telegram
 - VPS met SSH-toegang
 
 ---
@@ -43,9 +43,9 @@ mkdir -p /root/.openclaw
 EOF
 ```
 
-- `/root/openclaw/` — Docker Compose bestanden en `.env`
-- `/root/clawd/` — werkruimte voor de gateway (bestanden, exports)
-- `/root/.openclaw/` — persistente configuratie en geheugen van OpenClaw
+- `/root/openclaw/`  -  Docker Compose bestanden en `.env`
+- `/root/clawd/`  -  werkruimte voor de gateway (bestanden, exports)
+- `/root/.openclaw/`  -  persistente configuratie en geheugen van OpenClaw
 
 ---
 
@@ -87,7 +87,7 @@ COMPOSE
 ```
 
 > **Caddy nodig?** Als je ook Caddy wilt installeren (voor het delen van bestanden),
-> laat dit bestand staan — de Caddy-service wordt toegevoegd in [03-Caddy.md](03-Caddy.md).
+> laat dit bestand staan  -  de Caddy-service wordt toegevoegd in [03-Caddy.md](03-Caddy.md).
 
 ---
 
@@ -152,8 +152,8 @@ met Telegram.
 Na het starten is OpenClaw bereikbaar via de Control UI (via Tailscale-URL of publiek adres,
 afhankelijk van je server-setup). Stel via de UI het volgende in:
 
-- **Anthropic API-sleutel** — vereist voor AI-functionaliteit
-- **Bot-configuratie** — koppel en configureer je Telegram-bots
+- **Anthropic API-sleutel**  -  vereist voor AI-functionaliteit
+- **Bot-configuratie**  -  koppel en configureer je Telegram-bots
 - Overige instellingen worden opgeslagen in `/root/.openclaw/openclaw.json`
 
 Als de bot start maar niet reageert:

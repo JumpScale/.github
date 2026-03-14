@@ -6,7 +6,7 @@ Begroet de gebruiker en kondig aan dat je begint:
 
 ```
 We gaan een veilige VPS opzetten op Hetzner. Ik loop eerst even langs alles
-wat we nodig hebben — wat ik zelf kan checken doe ik meteen, en als ik
+wat we nodig hebben  -  wat ik zelf kan checken doe ik meteen, en als ik
 jou ergens bij nodig heb, zeg ik het duidelijk. Klaar?
 ```
 
@@ -19,7 +19,7 @@ Label elke stap duidelijk: **[Claude doet dit]** of **[Jij moet dit doen]**.
 
 ---
 
-### Check 1 — hcloud CLI [Claude doet dit]
+### Check 1  -  hcloud CLI [Claude doet dit]
 
 ```bash
 hcloud version
@@ -29,7 +29,7 @@ hcloud version
 - **Niet gevonden:** Zeg dit tegen de gebruiker:
 
   ```
-  De hcloud CLI is nog niet geïnstalleerd — dat is het gereedschap waarmee
+  De hcloud CLI is nog niet geïnstalleerd  -  dat is het gereedschap waarmee
   we de Hetzner server aanmaken. Ik help je dat installeren.
 
   Op Mac (aanbevolen): voer dit uit in je terminal:
@@ -44,7 +44,7 @@ hcloud version
 
 ---
 
-### Check 2 — Hetzner account & API-verbinding [Claude doet dit]
+### Check 2  -  Hetzner account & API-verbinding [Claude doet dit]
 
 ```bash
 hcloud context list
@@ -62,7 +62,7 @@ hcloud context list
 
   **Als nog geen account:**
   ```
-  Maak een account aan op hetzner.com/cloud — dat doe jij in de browser.
+  Maak een account aan op hetzner.com/cloud  -  dat doe jij in de browser.
   Kom terug als het klaar is, dan gaan we verder met de API-token.
   ```
 
@@ -82,7 +82,7 @@ hcloud context list
 
 ---
 
-### Check 3 — SSH keypair [Claude doet dit]
+### Check 3  -  SSH keypair [Claude doet dit]
 
 ```bash
 ls ~/.ssh/id_ed25519.pub 2>/dev/null || ls ~/.ssh/id_rsa.pub 2>/dev/null && echo "KEYPAIR GEVONDEN" || echo "GEEN KEYPAIR"
@@ -93,7 +93,7 @@ ls ~/.ssh/id_ed25519.pub 2>/dev/null || ls ~/.ssh/id_rsa.pub 2>/dev/null && echo
 
   ```
   Er is nog geen SSH-sleutelpaar op je computer. Dat is de digitale sleutel
-  waarmee je straks veilig kunt inloggen op je server — zonder wachtwoord.
+  waarmee je straks veilig kunt inloggen op je server  -  zonder wachtwoord.
 
   Voer dit uit in je terminal:
     ssh-keygen -t ed25519 -C "mijn-server" -f ~/.ssh/id_ed25519
@@ -157,19 +157,19 @@ Doorgaan?
 
 Voer de runbooks uit in volgorde. Sla over wat niet van toepassing is.
 
-### Stap 1 — VPS aanmaken (altijd)
+### Stap 1  -  VPS aanmaken (altijd)
 
 Lees en volg: `../Runbooks/01-Vps.md`
 
-### Stap 2 — Firewall instellen (altijd)
+### Stap 2  -  Firewall instellen (altijd)
 
 Lees en volg: `../Runbooks/02-Firewall.md`
 
-### Stap 3a — Tailscale (alleen als Tailscale=ja)
+### Stap 3a  -  Tailscale (alleen als Tailscale=ja)
 
 Lees en volg: `../Runbooks/03a-Tailscale.md`
 
-### Stap 3b — Extra hardening (alleen als Tailscale=nee)
+### Stap 3b  -  Extra hardening (alleen als Tailscale=nee)
 
 Lees en volg: `../Runbooks/03b-Hardening.md`
 

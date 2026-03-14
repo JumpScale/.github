@@ -1,12 +1,12 @@
-# Hetzner VPS — Veilige Server Setup
+# Hetzner VPS  -  Veilige Server Setup
 
 ## Wat doet deze skill?
 
-Deze skill begeleidt je — samen met een AI-assistent — door het opzetten van een veilige
+Deze skill begeleidt je  -  samen met een AI-assistent  -  door het opzetten van een veilige
 Hetzner Cloud VPS. Je krijgt een productie-klare server met SSH-hardening, dual-layer
 firewall en optioneel Tailscale VPN.
 
-**Geen serverkennis vereist** — de AI begeleidt je stap voor stap.
+**Geen serverkennis vereist**  -  de AI begeleidt je stap voor stap.
 
 ---
 
@@ -25,16 +25,16 @@ maakt de server aan, configureert de beveiliging en loopt een verificatie-checkl
 
 Elke installatie bevat:
 
-- **Hetzner Cloud VPS** met Ubuntu — aangemaakt via de hcloud CLI
-- **SSH-hardening** — alleen key-based login, wachtwoord uitgeschakeld
-- **Dual-layer firewall** — Hetzner Cloud Firewall (netwerkniveau) + UFW (OS-niveau)
+- **Hetzner Cloud VPS** met Ubuntu  -  aangemaakt via de hcloud CLI
+- **SSH-hardening**  -  alleen key-based login, wachtwoord uitgeschakeld
+- **Dual-layer firewall**  -  Hetzner Cloud Firewall (netwerkniveau) + UFW (OS-niveau)
 - **Automatische beveiligingsupdates** via unattended-upgrades
 
 Daarnaast kies je:
 
 ### Met Tailscale (aanbevolen)
 Tailscale is een VPN-dienst die een privaat netwerk aanmaakt. Je server is alleen
-bereikbaar via dit netwerk — niet via het publieke internet.
+bereikbaar via dit netwerk  -  niet via het publieke internet.
 
 - Geen extra publieke poorten nodig
 - Automatisch certificaatbeheer
@@ -43,9 +43,9 @@ bereikbaar via dit netwerk — niet via het publieke internet.
 ### Zonder Tailscale
 Extra beveiligingsmaatregelen compenseren de publieke blootstelling:
 
-- **fail2ban** — automatische IP-blokkering bij herhaalde mislukte pogingen
-- **IP-restrictie** — optioneel: alleen toegang vanuit bekende IP-adressen
-- **HTTPS via Let's Encrypt** — verplicht voor elke service die je publiek maakt
+- **fail2ban**  -  automatische IP-blokkering bij herhaalde mislukte pogingen
+- **IP-restrictie**  -  optioneel: alleen toegang vanuit bekende IP-adressen
+- **HTTPS via Let's Encrypt**  -  verplicht voor elke service die je publiek maakt
 
 ---
 

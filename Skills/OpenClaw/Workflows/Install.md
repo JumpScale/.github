@@ -6,7 +6,7 @@ Begroet de gebruiker en kondig aan dat je begint:
 
 ```
 We gaan OpenClaw installeren op je server. Ik loop eerst even langs alles
-wat we nodig hebben — wat ik zelf kan checken doe ik meteen, en als ik
+wat we nodig hebben  -  wat ik zelf kan checken doe ik meteen, en als ik
 jou ergens bij nodig heb, zeg ik het duidelijk. Klaar?
 ```
 
@@ -19,7 +19,7 @@ Label elke stap duidelijk: **[Claude doet dit]** of **[Jij moet dit doen]**.
 
 ---
 
-### Check 1 — SSH toegang [Claude doet dit]
+### Check 1  -  SSH toegang [Claude doet dit]
 
 Vraag de gebruiker om het IP-adres of de hostnaam van de server.
 
@@ -33,7 +33,7 @@ ssh root@<IP> "echo 'SSH OK' && uname -a"
 
 ---
 
-### Check 2 — Docker [Claude doet dit]
+### Check 2  -  Docker [Claude doet dit]
 
 ```bash
 ssh root@<IP> "docker --version && docker compose version"
@@ -44,7 +44,7 @@ ssh root@<IP> "docker --version && docker compose version"
 
 ---
 
-### Check 3 — GitHub toegang OpenClaw [Claude doet dit]
+### Check 3  -  GitHub toegang OpenClaw [Claude doet dit]
 
 ```bash
 curl -s -o /dev/null -w "%{http_code}" https://github.com/openclaw/openclaw
@@ -59,7 +59,7 @@ curl -s -o /dev/null -w "%{http_code}" https://github.com/openclaw/openclaw
 
 ---
 
-### Check 4 — Telegram Bot Token [Jij moet dit doen]
+### Check 4  -  Telegram Bot Token [Jij moet dit doen]
 
 ```
 Voor de installatie van OpenClaw heb je een Telegram Bot Token nodig.
@@ -78,7 +78,7 @@ Heb je al een bot aangemaakt via @BotFather?
   2. Stuur: /newbot
   3. Kies een naam voor je bot (bijv. "Mijn OpenClaw")
   4. Kies een gebruikersnaam (moet eindigen op 'bot', bijv. "mijnopenclaw_bot")
-  5. BotFather stuurt je een token — dat ziet eruit als: 123456789:ABCdef...
+  5. BotFather stuurt je een token  -  dat ziet eruit als: 123456789:ABCdef...
 
   Bewaar dat token, je hebt het straks nodig.
   ```
@@ -134,15 +134,15 @@ Doorgaan?
 
 ## Fase 3: Uitvoering
 
-### Stap 1 — Docker (indien nodig)
+### Stap 1  -  Docker (indien nodig)
 
 Lees en volg: `../Runbooks/01-Docker.md`
 
-### Stap 2 — OpenClaw installeren
+### Stap 2  -  OpenClaw installeren
 
 Lees en volg: `../Runbooks/02-OpenClaw.md`
 
-### Stap 3 — Caddy (alleen als gekozen)
+### Stap 3  -  Caddy (alleen als gekozen)
 
 Lees en volg: `../Runbooks/03-Caddy.md`
 

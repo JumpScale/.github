@@ -1,12 +1,12 @@
-# 03b-Hardening — Extra Beveiliging zonder Tailscale
+# 03b-Hardening  -  Extra Beveiliging zonder Tailscale
 
 ## Context
 
-Deze runbook is van toepassing als je bewust **geen Tailscale** gebruikt. Tailscale biedt een privé versleutelde tunnel tussen jouw apparaten en de VPS — zonder Tailscale is de OpenClaw gateway publiek bereikbaar via internet. Dat is niet per definitie onveilig, maar het vereist meer compenserende maatregelen.
+Deze runbook is van toepassing als je bewust **geen Tailscale** gebruikt. Tailscale biedt een privé versleutelde tunnel tussen jouw apparaten en de VPS  -  zonder Tailscale is de OpenClaw gateway publiek bereikbaar via internet. Dat is niet per definitie onveilig, maar het vereist meer compenserende maatregelen.
 
 Zonder Tailscale zijn de twee voornaamste risico's:
-1. **Poort 443 staat publiek open** — meer aanvalsoppervlak dan met Tailscale (alleen poort 22).
-2. **De gateway is direct bereikbaar** — een zwak token of Caddy-misconfiguratie leidt direct tot blootstelling.
+1. **Poort 443 staat publiek open**  -  meer aanvalsoppervlak dan met Tailscale (alleen poort 22).
+2. **De gateway is direct bereikbaar**  -  een zwak token of Caddy-misconfiguratie leidt direct tot blootstelling.
 
 Deze runbook beschrijft hoe je dat risico beheersbaar maakt.
 
@@ -18,7 +18,7 @@ Deze runbook beschrijft hoe je dat risico beheersbaar maakt.
 |--------|--------------|-----------------|
 | OpenClaw bereikbaar via | Privé Tailscale URL | Publiek IP + HTTPS |
 | Poorten publiek open | Alleen 22 + 41641 | 22 + 443 |
-| Risico | Laag | Hoger — meer aandacht nodig |
+| Risico | Laag | Hoger  -  meer aandacht nodig |
 | Authenticatie gateway | Token via privé tunnel | Token over publiek internet (vereist TLS) |
 | Fail2ban nodig | Optioneel | **Verplicht** |
 
@@ -30,7 +30,7 @@ Deze runbook beschrijft hoe je dat risico beheersbaar maakt.
 
 Wat je nodig hebt:
 - Een domeinnaam die naar het publieke IP van de VPS wijst (A-record)
-- Caddy geconfigureerd met dat domein — Caddy regelt automatisch Let's Encrypt certificaatuitgifte en -verlenging
+- Caddy geconfigureerd met dat domein  -  Caddy regelt automatisch Let's Encrypt certificaatuitgifte en -verlenging
 - Een sterk gateway token (zie Sectie 3)
 
 **Verschil in Caddy-configuratie:**
@@ -40,7 +40,7 @@ Zie `05-Caddy.md` voor de volledige Caddy-setup. Het kritieke verschil zonder Ta
 | Instelling | Met Tailscale | Zonder Tailscale |
 |-----------|--------------|-----------------|
 | Caddy listen | `127.0.0.1:80` | `0.0.0.0:443` (of domeinnaam) |
-| TLS | Optioneel (tunnel is al versleuteld) | Verplicht — Caddy doet dit automatisch met Let's Encrypt |
+| TLS | Optioneel (tunnel is al versleuteld) | Verplicht  -  Caddy doet dit automatisch met Let's Encrypt |
 | Domeinnaam | Niet vereist | Vereist voor Let's Encrypt |
 
 Caddy haalt automatisch een Let's Encrypt certificaat op als je een domeinnaam configureert. Zorg dat de DNS A-record klopt vóór je Caddy start.
@@ -48,7 +48,7 @@ Caddy haalt automatisch een Let's Encrypt certificaat op als je een domeinnaam c
 **Extra Hetzner-firewallregel (alleen zonder Tailscale):**
 
 ```bash
-# HTTPS toestaan — alleen toevoegen als er geen Tailscale wordt gebruikt
+# HTTPS toestaan  -  alleen toevoegen als er geen Tailscale wordt gebruikt
 hcloud firewall add-rule <FIREWALL-NAAM> \
   --direction in --protocol tcp --port 443 \
   --source-ips 0.0.0.0/0 --source-ips ::/0
@@ -67,11 +67,11 @@ Het gateway token is de enige authenticatielaag voor de OpenClaw API. Zonder Tai
 openssl rand -hex 32
 ```
 
-Sla het gegenereerde token op in `/root/openclaw/.env` als de waarde van `OPENCLAW_GATEWAY_TOKEN`. Het auto-gegenereerde token bij installatie is al voldoende sterk — gebruik dit commando als je het wil vervangen of roteren.
+Sla het gegenereerde token op in `/root/openclaw/.env` als de waarde van `OPENCLAW_GATEWAY_TOKEN`. Het auto-gegenereerde token bij installatie is al voldoende sterk  -  gebruik dit commando als je het wil vervangen of roteren.
 
 **Aandachtspunten:**
 - Deel het token nooit via onversleutelde kanalen (email, Slack zonder encryptie).
-- Roteer het token als je vermoedt dat het gecompromitteerd is — dit vereist een herstart van de gateway container.
+- Roteer het token als je vermoedt dat het gecompromitteerd is  -  dit vereist een herstart van de gateway container.
 - Bewaar het token op een veilige plek (password manager).
 
 ---
@@ -91,7 +91,7 @@ ssh root@<IP> "ufw delete allow 443/tcp"
 ssh root@<IP> "ufw status verbose"
 ```
 
-> Doe stap 1 altijd vóór stap 2 — anders sluit je jezelf buitenaf.
+> Doe stap 1 altijd vóór stap 2  -  anders sluit je jezelf buitenaf.
 
 Als je IP-adres dynamisch is (wisselend), is deze aanpak onpraktisch. In dat geval is fail2ban (Sectie 5) een betere compenserende maatregel.
 
@@ -135,5 +135,5 @@ Zonder Tailscale zijn dit de punten die extra aandacht vragen:
 - **Gateway token**: houd het geheim, sla het veilig op in een password manager, en roteer het periodiek of bij twijfel.
 - **Logs monitoren**: controleer regelmatig op ongeautoriseerde toegangspogingen via `journalctl -u caddy` en `fail2ban-client status`.
 - **IP-allowlisting**: als je IP-adres stabiel is, is IP-restrictie via UFW de meest effectieve extra beveiligingsmaatregel.
-- **Certificaatverlening**: Caddy verlengt Let's Encrypt certificaten automatisch, maar controleer af en toe of dit succesvol verloopt — een verlopen certificaat blokkeert alle toegang.
-- **Poort 443 in Hetzner-firewall**: als je de service tijdelijk wil afsluiten voor buitenstaanders, verwijder dan de Hetzner-firewallregel voor poort 443 — dat werkt sneller dan UFW-wijzigingen.
+- **Certificaatverlening**: Caddy verlengt Let's Encrypt certificaten automatisch, maar controleer af en toe of dit succesvol verloopt  -  een verlopen certificaat blokkeert alle toegang.
+- **Poort 443 in Hetzner-firewall**: als je de service tijdelijk wil afsluiten voor buitenstaanders, verwijder dan de Hetzner-firewallregel voor poort 443  -  dat werkt sneller dan UFW-wijzigingen.

@@ -1,4 +1,4 @@
-# 01-Docker — Docker installeren
+# 01-Docker  -  Docker installeren
 
 Docker is de containerruntime waarin OpenClaw draait. Dit runbook controleert of Docker
 aanwezig is en installeert het indien nodig.
@@ -51,4 +51,4 @@ ssh root@<IP> "systemctl restart docker"
 
 ## Vervolgstap
 
-Ga verder met: **[02-OpenClaw.md](02-OpenClaw.md)** — OpenClaw installeren en configureren.
+Ga verder met: **[02-OpenClaw.md](02-OpenClaw.md)**  -  OpenClaw installeren en configureren.

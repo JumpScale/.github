@@ -5,7 +5,7 @@ description: Installatie en onderhoud van OpenClaw op een eigen server. USE WHEN
 
 # OpenClaw
 
-Begeleide installatie en onderhoud van OpenClaw — een persoonlijke AI-assistent
+Begeleide installatie en onderhoud van OpenClaw  -  een persoonlijke AI-assistent
 die je zelf host op je eigen server.
 
 ## Workflow Routing
