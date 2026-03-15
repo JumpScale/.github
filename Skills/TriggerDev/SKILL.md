@@ -8,6 +8,12 @@ description: Begeleide installatie en onderhoud van Trigger.dev v4 background jo
 Begeleide installatie en onderhoud van Trigger.dev v4 op een eigen server.
 Geschikt voor technisch onderlegde gebruikers die background job processing willen zonder afhankelijkheid van Trigger.dev cloud.
 
+## Vereisten
+
+- Een werkende VPS met SSH-toegang, Docker en Docker Compose (zie de **[HetznerVPS](../HetznerVPS/)** skill als je nog geen server hebt)
+- Minimaal 8 GB RAM (aanbevolen: 16 GB), 2 CPU cores, 40 GB disk
+- GitHub account met PAT (write:packages scope) voor ghcr.io
+
 ## Workflow Routing
 
 **When executing a workflow, output this notification:**

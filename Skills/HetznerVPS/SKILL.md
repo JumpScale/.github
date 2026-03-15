@@ -38,6 +38,17 @@ Een Hetzner Cloud VPS met:
 | + Tailscale | Privétoegang via Tailscale mesh VPN (aanbevolen) |
 | Zonder Tailscale | Extra hardening: fail2ban, IP-restrictie, publieke HTTPS |
 
+## Na de VPS setup
+
+Na een werkende VPS kun je software installeren met deze skills:
+
+| Skill | Wat | Link |
+|-------|-----|------|
+| **N8nSelfHosted** | Workflow automation (Docker) | [→ Skill](../N8nSelfHosted/) |
+| **TwentyCRM** | CRM systeem (Docker) | [→ Skill](../TwentyCRM/) |
+| **OpenClaw** | AI-assistent + Telegram bot | [→ Skill](../OpenClaw/) |
+| **TriggerDev** | Background job processing (Docker, 8+ GB RAM) | [→ Skill](../TriggerDev/) |
+
 ## Bronnen (alleen verifieerbaar)
 
 - Hetzner docs: https://docs.hetzner.cloud/reference/cloud

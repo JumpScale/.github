@@ -8,6 +8,10 @@ description: Begeleide installatie en onderhoud van n8n workflow automation op e
 Begeleide installatie en onderhoud van n8n op een eigen server.
 Geschikt voor technisch onderlegde gebruikers die workflow automation willen zonder afhankelijkheid van n8n cloud.
 
+## Vereisten
+
+- Een werkende VPS met SSH-toegang, Docker en Docker Compose (zie de **[HetznerVPS](../HetznerVPS/)** skill als je nog geen server hebt)
+
 ## Workflow Routing
 
 **When executing a workflow, output this notification:**

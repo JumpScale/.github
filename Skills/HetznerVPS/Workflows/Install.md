@@ -195,7 +195,11 @@ Bewaar deze gegevens veilig:
 - IP-adres van je VPS
 - Tailscale-hostnaam (indien van toepassing)
 
-Volgende stappen:
-- Applicaties installeren (bijv. OpenClaw, Twenty CRM, n8n)
-- Periodiek onderhoud: zeg "controleer de security van mijn VPS"
+Volgende stappen -- applicaties installeren:
+- n8n (workflow automation): zie de N8nSelfHosted skill
+- Twenty CRM (klantbeheer): zie de TwentyCRM skill
+- OpenClaw (AI-assistent): zie de OpenClaw skill
+- Trigger.dev (background jobs): zie de TriggerDev skill
+
+Periodiek onderhoud: zeg "controleer de security van mijn VPS"
 ```
