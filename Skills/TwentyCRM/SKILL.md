@@ -8,6 +8,10 @@ description: Begeleide installatie en onderhoud van Twenty CRM op een eigen serv
 Begeleide installatie en onderhoud van Twenty CRM op een eigen server.
 Geschikt voor technisch onderlegde gebruikers die een professioneel CRM willen zonder vendor lock-in.
 
+## Vereisten
+
+- Een werkende VPS met SSH-toegang, Docker en Docker Compose (zie de **[HetznerVPS](../HetznerVPS/)** skill als je nog geen server hebt)
+
 ## Workflow Routing
 
 **When executing a workflow, output this notification:**
