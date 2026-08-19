@@ -1,0 +1,12 @@
+name: Issue-hygiene
+on:
+  issues:
+    types: [opened, unassigned]
+permissions:
+  issues: write
+jobs:
+  auto-assign:
+    uses: JumpScale/.github-private/.github/workflows/auto-assign-creator.yml@main
+    with:
+      fallback-assignee: bvdnu   # vangt bot-issues; de repo-verantwoordelijke
+      runs-on-json: '"ubuntu-latest"'   # publieke repo: kan niet in de restricted runner-group, bewuste GitHub-hosted fallback
