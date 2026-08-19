@@ -1,3 +1,10 @@
+# Publieke repo: kan de private reusable workflow in .github-private niet aanroepen
+# (GitHub staat private reusable workflows alleen toe voor private callers) en mag
+# ook niet in de restricted runner-group jumpscale-ci (fork-PR-regel). Daarom hier
+# een standalone kopie van auto-assign-creator.yml op de GitHub-hosted runner.
+# Wijzigt de bron in .github-private, werk deze kopie dan mee bij.
+# Extra t.o.v. de bron: een externe melder (geen org-lid) is niet toewijsbaar;
+# dan valt de workflow terug op de fallback in plaats van rood te falen.
 name: Issue-hygiene
 on:
   issues:
@@ -5,8 +12,42 @@ on:
 permissions:
   issues: write
 jobs:
-  auto-assign:
-    uses: JumpScale/.github-private/.github/workflows/auto-assign-creator.yml@main
-    with:
-      fallback-assignee: bvdnu   # vangt bot-issues; de repo-verantwoordelijke
-      runs-on-json: '"ubuntu-latest"'   # publieke repo: kan niet in de restricted runner-group, bewuste GitHub-hosted fallback
+  assign-creator:
+    if: github.event.issue.assignee == null
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Wijs de maker toe (of de fallback bij een bot of externe melder)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CREATOR: ${{ github.event.issue.user.login }}
+          CREATOR_TYPE: ${{ github.event.issue.user.type }}
+          FALLBACK: bvdnu
+          REPO: ${{ github.repository }}
+          NUM: ${{ github.event.issue.number }}
+        run: |
+          assign() {
+            curl -sf -X POST \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$REPO/issues/$NUM/assignees" \
+              -d "{\"assignees\":[\"$1\"]}" > /dev/null
+          }
+          if [ "$CREATOR_TYPE" = "Bot" ]; then
+            TARGET="$FALLBACK"
+          else
+            TARGET="$CREATOR"
+          fi
+          if [ -z "$TARGET" ]; then
+            echo "::warning::Issue #$NUM: geen target en geen fallback; issue blijft onbelegd."
+            exit 0
+          fi
+          if assign "$TARGET"; then
+            echo "Issue #$NUM toegewezen aan $TARGET."
+          elif [ "$TARGET" != "$FALLBACK" ] && [ -n "$FALLBACK" ]; then
+            echo "::warning::Maker '$TARGET' is niet toewijsbaar (externe melder?); fallback '$FALLBACK' krijgt het issue."
+            assign "$FALLBACK" && echo "Issue #$NUM toegewezen aan $FALLBACK."
+          else
+            echo "::error::Toewijzen van issue #$NUM aan '$TARGET' mislukt."
+            exit 1
+          fi
