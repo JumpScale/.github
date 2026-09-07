@@ -9,22 +9,29 @@ name: Issue-hygiene
 on:
   issues:
     types: [opened, unassigned]
+  pull_request:
+    types: [opened, unassigned]
 permissions:
   issues: write
+  pull-requests: write
 jobs:
   assign-creator:
-    if: github.event.issue.assignee == null
+    # PR's van forks draaien met een read-only token; die slaan we over (blijven onbelegd).
+    if: >-
+      (github.event_name == 'issues' && github.event.issue.assignee == null) ||
+      (github.event_name == 'pull_request' && github.event.pull_request.assignee == null
+       && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Wijs de maker toe (of de fallback bij een bot of externe melder)
+      - name: Wijs de maker toe (of de fallback bij een bot of externe melder); issues en PR's
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CREATOR: ${{ github.event.issue.user.login }}
-          CREATOR_TYPE: ${{ github.event.issue.user.type }}
+          CREATOR: ${{ github.event.issue.user.login || github.event.pull_request.user.login }}
+          CREATOR_TYPE: ${{ github.event.issue.user.type || github.event.pull_request.user.type }}
           FALLBACK: bvdnu
           REPO: ${{ github.repository }}
-          NUM: ${{ github.event.issue.number }}
+          NUM: ${{ github.event.issue.number || github.event.pull_request.number }}
         run: |
           assign() {
             curl -sf -X POST \
