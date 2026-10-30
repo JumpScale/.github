@@ -21,7 +21,7 @@ jobs:
       (github.event_name == 'issues' && github.event.issue.assignee == null) ||
       (github.event_name == 'pull_request' && github.event.pull_request.assignee == null
        && github.event.pull_request.head.repo.full_name == github.repository)
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-2
     timeout-minutes: 5
     steps:
       - name: Wijs de maker toe (of de fallback bij een bot of externe melder); issues en PR's
